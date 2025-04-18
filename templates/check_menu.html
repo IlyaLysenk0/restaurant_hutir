@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% include '_admin_navigation.html' %}
+{% block title %}Перевірка меню{% endblock %}
+{% block extra_css %}
+    <style nonce="{{ nonce }}">
+        .container {
+            max-width: 1200px;
+            margin-top: 3rem;
+        }
+        .table {
+            border-color: var(--primary);
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Перевірка меню</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Назва</th>
+                    <th>Опис</th>
+                    <th>Ціна</th>
+                    <th>Активний</th>
+                    <th>Дія</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pos in all_positions %}
+                <tr>
+                    <td>{{ pos.id }}</td>
+                    <td>{{ pos.name }}</td>
+                    <td>{{ pos.description }}</td>
+                    <td>{{ pos.price }}</td>
+                    <td>{{ "Так" if pos.active else "Ні" }}</td>
+                    <td>
+                        <form method="post" class="d-inline">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                            <input type="hidden" name="pos_id" value="{{ pos.id }}">
+                            <button type="submit" name="change_status" class="btn btn-primary btn-sm">Змінити статус</button>
+                            <button type="submit" name="delete_position" class="btn btn-danger btn-sm">Видалити</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% include '_navigation.html' %}
+{% block title %}Замовлення №{{ order.id }}{% endblock %}
+{% block extra_css %}
+    <style nonce="{{ nonce }}">
+        .container {
+            max-width: 600px;
+            margin-top: 3rem;
+        }
+        .list-group-item {
+            border-color: var(--primary);
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Ваше замовлення №{{ order.id }}</h2>
+        <p class="fw-bold">Список замовлення</p>
+        <ul class="list-group mb-3">
+            {% for i in order.order_list %}
+                <li class="list-group-item">{{ i }} (к-сть: {{ order.order_list[i] }})</li>
+            {% endfor %}
+        </ul>
+        <p class="fw-bold">Загальна сума: {{total_price}} грн</p>
+        <p class="text-muted">{{ order.order_time }}</p>
+    </div>
+{% endblock %}

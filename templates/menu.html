@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% include '_navigation.html' %}
+{% block title %}Меню{% endblock %}
+{% block extra_css %}
+    <style nonce="{{ nonce }}">
+        .container {
+            margin-top: 3rem;
+        }
+        .card {
+            border-color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-title {
+            color: var(--primary);
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Усі актуальні позиції</h2>
+        <div class="row">
+            {% for position in all_positions %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="/static/menu/{{ position.file_name }}" class="card-img-top" alt="{{ position.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ position.name }}</h5>
+                            <p class="card-text text-muted">{{ position.ingredients }}</p>
+                            <a href="/position/{{ position.name }}" class="btn btn-primary">Оглянути</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

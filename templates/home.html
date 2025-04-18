@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% include '_navigation.html' %}
+{% block title %}Головна{% endblock %}
+{% block extra_css %}
+    <style nonce="{{ nonce }}">
+        .container {
+            margin-top: 3rem;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container text-center">
+        <h1 class="text-center">Вітаємо у нашому ресторані "Хутір"!</h1>
+    </div>
+{% endblock %}

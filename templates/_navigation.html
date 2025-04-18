@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="/">Хутір</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Головна</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('menu') }}">Меню</a></li>
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('create_order') }}">Кошик</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('my_orders') }}">Мої замовлення</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('reserved') }}">Бронювання</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Вийти</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Вхід</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Реєстрація</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

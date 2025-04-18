@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% include '_navigation.html' %}
+{% block title %}Вхід{% endblock %}
+{% block extra_css %}
+    <style nonce="{{ nonce }}">
+        .container {
+            max-width: 500px;
+            margin-top: 3rem;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash-messages">
+              <div class="alert alert-dismissible fade show" role="alert">
+                {{ messages[-1] }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            </div>
+          {% endif %}
+        {% endwith %}
+        <h2>Вхід в акаунт</h2>
+        <form action="/login" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <input type="text" name="nickname" placeholder="Nickname" class="form-control mb-3" required>
+            <input type="password" name="password" placeholder="Password" class="form-control mb-3" required>
+            <button type="submit" class="btn btn-primary">Увійти</button>
+        </form>
+        <a href="/register" class="text-center">Створити акаунт</a>
+    </div>
+{% endblock %}

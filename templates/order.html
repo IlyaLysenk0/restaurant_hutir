@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% include '_navigation.html' %}
+{% block title %}Замовлення{% endblock %}
+{% block extra_css %}
+    <style nonce="{{ nonce }}">
+        .container {
+            max-width: 700px;
+            margin-top: 3rem;
+        }
+        .table {
+            border-color: var(--primary);
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .btn-primary {
+            width: auto;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Оформлення замовлення</h2>
+        <form method="post" class="mb-4">
+            <p class="fw-bold">Ваш номер телефону:</p>
+            <input type="text" name="phone" class="form-control mb-3" placeholder="Номер телефону" required>
+            <button type="submit" class="btn btn-primary">Оформити</button>
+        </form>
+        <table class="table table-bordered">
+            {% for key, value in session['cart'].items() %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }} шт.</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

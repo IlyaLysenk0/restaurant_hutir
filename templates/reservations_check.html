@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% include '_admin_navigation.html' %}
+{% block title %}Перевірка бронювань{% endblock %}
+{% block extra_css %}
+    <style nonce="{{ nonce }}">
+        .container {
+            max-width: 1000px;
+            margin-top: 3rem;
+        }
+        .table {
+            border-color: var(--primary);
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Перевірка бронювань</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Час</th>
+                    <th>Тип столика</th>
+                    <th>Користувач</th>
+                    <th>Дія</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for res in all_reservations %}
+                <tr>
+                    <td>{{ res.id }}</td>
+                    <td>{{ res.time_start }}</td>
+                    <td>{{ res.type_table }}</td>
+                    <td>{{ res.user.nickname }}</td>
+                    <td>
+                        <form method="post" class="d-inline">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                            <input type="hidden" name="reserv_id" value="{{ res.id }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Видалити</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

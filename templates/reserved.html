@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% include '_navigation.html' %}
+{% block title %}Бронювання столика{% endblock %}
+{% block extra_css %}
+    <style nonce="{{ nonce }}">
+        .container {
+            max-width: 600px;
+            margin-top: 3rem;
+        }
+        .form-select, .form-control {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Бронювання столика</h2>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash-messages">
+              <div class="alert alert-dismissible fade show" role="alert">
+                {{ messages[-1] }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            </div>
+          {% endif %}
+        {% endwith %}
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <label for="table_type" class="form-label fw-bold">Оберіть тип столика</label>
+            <select name="table_type" id="table_type" class="form-select" required>
+                <option value="1-2">1-2 людини</option>
+                <option value="3-4">3-4 людини</option>
+                <option value="4+">Більше 4-х людей</option>
+            </select>
+            <label for="time" class="form-label fw-bold">Оберіть час</label>
+            <input type="datetime-local" name="time" id="time" class="form-control" required>
+            <input type="hidden" name="latitude" id="latitude">
+            <input type="hidden" name="longitude" id="longitude">
+            <button type="submit" class="btn btn-primary">Забронювати</button>
+        </form>
+    </div>
+{% endblock %}
+{% block extra_js %}
+    <script nonce="{{ nonce }}">
+        window.onload = function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        document.getElementById("latitude").value = position.coords.latitude;
+                        document.getElementById("longitude").value = position.coords.longitude;
+                    },
+                    function (error) {
+                        console.error("Геолокацію не вдалося отримати:", error);
+                    }
+                );
+            } else {
+                console.warn("Геолокація не підтримується у вашому браузері.");
+            }
+        };
+    </script>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% include '_navigation.html' %}
+{% block title %}Оформлення замовлення{% endblock %}
+{% block extra_css %}
+    <style nonce="{{ nonce }}">
+        .container {
+            max-width: 600px;
+            margin-top: 3rem;
+        }
+        .list-group-item {
+            border-color: var(--primary);
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash-messages">
+              <div class="alert alert-dismissible fade show" role="alert">
+                {{ messages[-1] }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            </div>
+          {% endif %}
+        {% endwith %}
+        {% if basket %}
+            <h2>Ваш кошик</h2>
+            <ul class="list-group mb-3">
+                {% for position in basket %}
+                    <li class="list-group-item">{{ position }} (к-сть: {{ basket[position] }})</li>
+                {% endfor %}
+            </ul>
+            <form method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                <button type="submit" class="btn btn-primary">Оформити замовлення</button>
+            </form>
+        {% else %}
+            <h1 class="text-center">Ваш список замовлень пустий</h1>
+        {% endif %}
+    </div>
+{% endblock %}

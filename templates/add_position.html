@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% include '_admin_navigation.html' %}
+{% block title %}Додавання позиції{% endblock %}
+{% block extra_css %}
+    <style nonce="{{ nonce }}">
+        .container {
+            max-width: 700px;
+            margin-top: 3rem;
+        }
+        textarea.form-control {
+            min-height: 100px;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Додавання нової позиції</h2>
+        {% include '_admin_navigation.html' %}
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <input type="text" name="name" placeholder="Назва позиції" class="form-control mb-3" required>
+            <input type="file" name="img" accept="image/*" class="form-control mb-3" required>
+            <textarea name="ingredients" placeholder="Інгредієнти" class="form-control mb-3" required></textarea>
+            <textarea name="description" placeholder="Опис" class="form-control mb-3" required></textarea>
+            <input type="number" name="price" placeholder="Ціна (грн)" class="form-control mb-3" min="0" required>
+            <input type="number" name="weight" placeholder="Вага (г)" class="form-control mb-3" min="0" required>
+            <button type="submit" class="btn btn-primary">Додати товар</button>
+        </form>
+    </div>
+{% endblock %}

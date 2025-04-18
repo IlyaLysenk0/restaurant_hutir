@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% include '_admin_navigation.html' %}
+{% block title %}Користувачі{% endblock %}
+{% block extra_css %}
+    <style nonce="{{ nonce }}">
+        .container {
+            max-width: 800px;
+            margin-top: 3rem;
+        }
+        .table {
+            border-color: var(--primary);
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Користувачі</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Нікнейм</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in all_users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.nickname }}</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

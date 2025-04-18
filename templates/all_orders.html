@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% include '_admin_navigation.html' %}
+{% block title %}Перевірка замовлень{% endblock %}
+{% block extra_css %}
+    <style nonce="{{ nonce }}">
+        .container {
+            max-width: 1000px;
+            margin-top: 3rem;
+        }
+        .table {
+            border-color: var(--primary);
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Перевірка замовлень</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Замовлення</th>
+                    <th>Час</th>
+                    <th>Користувач</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in all_orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.order_list }}</td>
+                    <td>{{ order.order_time }}</td>
+                    <td>{{ order.user.nickname }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
