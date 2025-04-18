@@ -1,0 +1,119 @@
+:root {
+    --primary: #4A1D13; /* Насичений бордовий */
+    --secondary: #1A1A1A; /* Чорний */
+    --accent: #E8B923; /* Золотий для акцентів */
+    --light: #FFF5E1; /* Теплий кремовий фон */
+    --text-muted: #7A3B2E; /* М’який бордово-коричневий для другорядного тексту */
+}
+body {
+    background-color: var(--light);
+    color: var(--secondary);
+    font-family: 'Arial', sans-serif;
+}
+.navbar {
+    background-color: var(--primary);
+    padding: 1rem 0;
+}
+.nav-link, .navbar-brand {
+    color: var(--light) !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+.nav-link:hover {
+    color: var(--accent) !important;
+}
+.container {
+    padding: 2rem;
+    background-color: rgba(74, 29, 19, 0.05);
+    border-radius: 10px;
+}
+h1, h2, h5, h6 {
+    color: var(--primary);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.form-control, .form-select {
+    border-color: var(--text-muted);
+    background-color: var(--light);
+    color: var(--secondary);
+    margin-bottom: 1rem;
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(74, 29, 19, 0.25);
+}
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    transition: all 0.3s ease;
+    padding: 0.75rem;
+}
+.btn-primary:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+}
+.alert {
+    background-color: rgba(74, 29, 19, 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: var(--accent);
+}
+.card {
+    border-color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+.card-title {
+    color: var(--primary);
+}
+pre {
+    background-color: var(--light);
+    border: 1px solid var(--text-muted);
+    padding: 1rem;
+    border-radius: 5px;
+    white-space: pre-wrap;
+}
+.table {
+    border-color: var(--primary);
+}
+.table th, .table td {
+    vertical-align: middle;
+}
+.list-group-item {
+    border-color: var(--primary);
+    background-color: var(--light);
+}
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+    h2, h5 {
+        font-size: 1.5rem;
+    }
+}
